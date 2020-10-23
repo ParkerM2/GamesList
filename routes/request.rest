@@ -5,6 +5,8 @@ GET http://localhost:8080/users HTTP/1.1
 
 GET http://localhost:8080/ HTTP/1.1
 
+###
+
 POST http://localhost:8080/users HTTP/1.1
 Content-Type: application/json
 
@@ -21,4 +23,4 @@ Content-Type: application/json
 {
     "name": "Kyle", 
     "password": "password"
-}
+};

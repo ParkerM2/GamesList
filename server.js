@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 8080;
 
 const db = require("./models");
 
-const userRoute = require('./routes/user-routes')
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
@@ -25,8 +24,8 @@ app.use(express.static("public"));
 // Routes Example 
 // =============================================================
 // user login route
-require("./routes/chicken-api-route")(app);
-app.use(userRoute);
+// require("./routes/chicken-api-route")(app);
+require('./routes/user')(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
