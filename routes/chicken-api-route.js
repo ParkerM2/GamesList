@@ -1,7 +1,7 @@
 
 
 // function to pull data from chicken-coop api
-Module.export = chickenCoop = function () {
+module.exports = function (app) {
 	const settings = {
 		"async": true,
 		"crossDomain": true,
@@ -11,8 +11,9 @@ Module.export = chickenCoop = function () {
 			"x-rapidapi-host": "chicken-coop.p.rapidapi.com",
 			"x-rapidapi-key": "8e8ba0a32emsh895bad159e9c555p14b6a1jsn1a8c5a1f1928"
 		}
-	};
-$.ajax(settings).done(function (response) {
-		console.log(response);
-	});	
-}
+		// 	};
+		// $.ajax(settings).done(function (response) {
+		// 		console.log(response);
+		// 	});	
+	}
+};
