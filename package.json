@@ -1,0 +1,28 @@
+{
+  "name": "gamelist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "devStart": "nodemon server.js",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParkerM2/GamesList.git"
+  },
+  "author": "Parker Manning",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ParkerM2/GamesList/issues"
+  },
+  "homepage": "https://github.com/ParkerM2/GamesList#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "express": "^4.17.1",
+    "http": "0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
