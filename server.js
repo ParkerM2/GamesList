@@ -6,11 +6,18 @@
 // =============================================================
 const express = require("express");
 
+const passport = require('passport');
+
 const app = express();
 
 const PORT = process.env.PORT || 8080;
 
 const db = require("./models");
+
+const bcrypt = require('bcrypt');
+
+const initPassport = require('./passport-config');
+initPassport(passport, email => {});
 
 app.use(express.urlencoded({ extended: true }));
 
