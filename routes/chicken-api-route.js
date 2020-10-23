@@ -1,7 +1,7 @@
 
 
 // function to pull data from chicken-coop api
-Module.export = function () {
+Module.export = chickenCoop = function () {
 	const settings = {
 		"async": true,
 		"crossDomain": true,
@@ -12,7 +12,7 @@ Module.export = function () {
 			"x-rapidapi-key": "8e8ba0a32emsh895bad159e9c555p14b6a1jsn1a8c5a1f1928"
 		}
 	};
-	$.ajax(settings).done(function (response) {
+$.ajax(settings).done(function (response) {
 		console.log(response);
-	});
+	});	
 }
