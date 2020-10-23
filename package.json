@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "devStart": "nodemon server.js",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,8 @@
   "homepage": "https://github.com/ParkerM2/GamesList#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "http": "0.0.1-security"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
