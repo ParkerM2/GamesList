@@ -1,8 +1,6 @@
 
 const connection = require('./../config/DBConnection');
 const bcrypt = require('bcrypt');
-const e = require('express');
-const saltRounds = 10;
 
 let createNewUser = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -15,7 +13,7 @@ let createNewUser = (data) => {
             let salt = bcrypt.genSaltSync(10);
             console.log(data, "after salt in register-service")
             let userItem = {
-                user_name: data.user_name,
+                user_name: data.fullname,
                 email: data.email,
                 user_password: bcrypt.hashSync(data.password, salt),
             };
@@ -36,7 +34,6 @@ let createNewUser = (data) => {
 
 let checkExistEmail = (email) => {
     return new Promise((resolve, reject) => {
-        console.log(email, "email inside of promise")
         try {
             connection.query(
                 'SELECT * FROM users WHERE email=?', [email],

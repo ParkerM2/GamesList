@@ -3,21 +3,15 @@ var express = require('express')
 var homePageController = require("../controllers/home-page");
 var registerController = require("../controllers/register");
 var loginController = require("../controllers/login-controller");
-var auth = require("../validation/authValidation");
-var passport = require("passport");
 var initPassportLocal = require("../controllers/passport-local-controller");
-var expressValidator = require('express-validator')
-const DBConnection = require('../config/DBConnection')
-const { body, validationResult } = require('express-validator');
-const {check} = require('express-validator')
-// Init all passport
-initPassportLocal();
+var passport = require('passport');
+
 
 let router = express.Router();
 
 let initWebRoutes = (app) => {
     router.get("/", loginController.checkLoggedIn, homePageController.handleHelloWorld);
-    router.get("/login",loginController.checkLoggedOut, loginController.getPageLogin);
+    router.get("/login",loginController.checkLoggedOut, loginController.getLoginPage);
     router.post("/login", passport.authenticate("local", {
         successRedirect: "/",
         failureRedirect: "/login",
@@ -32,7 +26,7 @@ let initWebRoutes = (app) => {
         }), function (res) {
             console.log("cb", res)
         }});
-    router.get("/register", registerController.getPageRegister);
+    router.get("/register", registerController.getRegisterPage);
     router.post("/register", [
         check(
             "password", "Invalid password. Password must be at least 2 chars long")
@@ -48,3 +42,20 @@ let initWebRoutes = (app) => {
     return app.use("/", router);
 };
 module.exports = initWebRoutes;
+
+// initPassportLocal();
+
+// var router = express.Router();
+// let initWebRoutes = (app) => {
+//     router.get("/", loginController.checkLoggedIn, homePageController.handleHelloWorld);
+//     router.post("/logout", loginController.postLogOut);
+
+//     router.get("/register", registerController.getRegisterPage );
+//     router.post("/register-new-user", registerController.createNewUser);
+
+//     router.get("/login",loginController.checkLoggedOut, loginController.handleLogin);
+//     router.post("/login", loginController.handleLogin);
+//     return app.use("/", router);
+// };
+
+// module.exports = initWebRoutes;
