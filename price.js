@@ -12,11 +12,20 @@ $.ajax({
          //this will grab the streaming links maybe I need another loop to grab URL arry for now grab one 
           for(var i=0;i<response.length;i++) {
           //console.log(response.included[i].attributes.url)
-          var gameName=(response[i].internalName)
-          console.log(gameName)
-          showResults.push(gameName)
-          console.log(gameName)
-  }}) }
+          gameInfo={
+                "gName":response[i].title,
+                "MCScore":response[i].metacriticScore,
+                "gprice":response[i].normalPrice,
+                "steamRating":response[i].steamRatingPercent,
+                "sale?":response[i].isOnSale,
+
+         
+          }
+
+          console.log(gameInfo)
+          showResults.push(gameInfo)
+
+}}) }
 
 
 
