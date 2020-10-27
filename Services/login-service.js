@@ -6,6 +6,7 @@ let handleLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         //check email is exist or not
         let user = await findUserByEmail(email);
+        console.log(user)
         if (user) {
             //compare password
             await bcrypt.compare(password, user.password).then((isMatch) => {
@@ -62,8 +63,10 @@ let findUserById = (id) => {
 
 let comparePassword = (password, userObject) => {
     return new Promise(async (resolve, reject) => {
+        console.log(userObject.user_password)
+        console.log("compare", password)
         try {
-            await bcrypt.compare(password, userObject.password).then((isMatch) => {
+            await bcrypt.compare(password, userObject.user_password).then((isMatch) => {
                 if (isMatch) {
                     resolve(true);
                 } else {
