@@ -1,11 +1,11 @@
 
-var DBConnection = require('./../config/DBConnection');
-var bcrypt = require('bcrypt')
+const connection = require('./../config/DBConnection');
+const bcrypt = require('bcrypt');
+const e = require('express');
+const saltRounds = 10;
 
 let createNewUser = (data) => {
-    console.log(data," in createNewUser")
     return new Promise(async (resolve, reject) => {
-        console.log(resolve, reject, "resolve, reject in new Promise")
         // check email is exist or not
         let isEmailExist = await checkExistEmail(data.email);
         if (isEmailExist) {
@@ -13,15 +13,16 @@ let createNewUser = (data) => {
         } else {
             // hash password
             let salt = bcrypt.genSaltSync(10);
-            let user = {
-                fullname: data.fullname,
+            console.log(data, "after salt in register-service")
+            let userItem = {
+                user_name: data.user_name,
                 email: data.email,
                 user_password: bcrypt.hashSync(data.password, salt),
             };
 
             //create a new account
-            DBConnection.query(
-                ' INSERT INTO users set ? ', user,
+            connection.query(
+                ' INSERT INTO users set ?? ;', userItem,
                 function(err, rows) {
                     if (err) {
                         reject(false)
@@ -34,33 +35,29 @@ let createNewUser = (data) => {
 };
 
 let checkExistEmail = (email) => {
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
+        console.log(email, "email inside of promise")
         try {
-            DBConnection.query(
-                'SELECT * FROM users;',
-                function(err, res) {
+            connection.query(
+                'SELECT * FROM users WHERE email=?', [email],
+                function(err, rows) {
                     if (err) {
-                        throw err;
+                        reject(err)
                     }
-
-                    console.log(JSON.parse(JSON.stringify(res)));
-
-                    let responseArr = JSON.parse(JSON.stringify(res));
-                    // if (email.length > 0) {
-                    //     resolve(true)
-                    //  } else {
-                    //     resolve(true)
-                    //  }
-                    responseArr.map(item => {if (item.email !== email) return resolve })
+                    let arr = JSON.parse(JSON.stringify(rows))
+                    console.log(arr, "arr")
+                    if (rows.length > 0) {
+                        resolve(true)
+                    } else {
+                        resolve(false)
+                    }
                 }
-            
             );
         } catch (err) {
             reject(err);
         }
     });
 };
-
 module.exports = {
     createNewUser: createNewUser
 };

@@ -22,18 +22,18 @@ let createNewUser = async (req, res) => {
     }
 
     //create a new user
-    let newUser = {
-        fullname: req.body.fullName,
+    let user = {
+        user_name: req.body.fullName,
         email: req.body.email,
-        password: req.body.password
+        user_password: req.body.password
     };
     try {
-        await registerService.createNewUser(newUser);
+        await registerService.createNewUser(user);
         console.log(res,"in the try")
         return res.redirect("/login");
     } catch (err) {
         req.flash("errors", err);
-        console.log(err, "erro above register")
+        console.log(err, "error above register in register.js")
         return res.redirect("/register");
     }
 };
