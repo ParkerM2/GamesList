@@ -1,16 +1,22 @@
+//dependencies 
+var registerService = require('./../services/register-service');
+const {validationResult} = require('express-validator');
 
-var registerService = require('./../services/register-service')
-// var validateResult = require('express-validator');
-const {validationResult} = require('express-validator')
+// Express-validator docs link -> https://express-validator.github.io/docs/
+// sending the register handlebars page
 let getPageRegister = (req, res) => {
     return res.render("register.handlebars", {
         errors: req.flash("errors")
     });
 };
 
+// function for creating a new validated user
 let createNewUser = async (req, res) => {
     //validate required fields
     let errorsArr = [];
+    // validationResult() is a express-validator function
+    // comes with a lot of premade methods to check for email address/password matches/
+    // credit cards etc
     let validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
         let errors = Object.values(validationErrors.mapped());
@@ -23,17 +29,17 @@ let createNewUser = async (req, res) => {
 
     //create a new user
     let newUser = {
-        fullname: req.body.fullName,
         email: req.body.email,
-        password: req.body.password
+        user_name: req.body.user_name,
+        user_password: req.body.password,
+        user_pokemon: null,
+        user_game_list: null,
     };
     try {
         await registerService.createNewUser(newUser);
-        console.log(res,"in the try")
         return res.redirect("/login");
     } catch (err) {
         req.flash("errors", err);
-        console.log(err, "erro above register")
         return res.redirect("/register");
     }
 };
