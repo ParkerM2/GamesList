@@ -25,7 +25,37 @@ $.ajax({
           console.log(gameInfo)
           showResults.push(gameInfo)
 
-}}) }
+}
+// store info into a string 
+localStorage.setItem('gameKey',JSON.stringify(showResults))
+}
+
+) }
+
+// summon and parse out the data 
+function displayCheapShark(findCheap){
+      results=JSON.parse(localStorage.get('gameKey'))
+      // console.log(results)
+      $("#resultsList").empty()
+      for (var i=0;i<results.length; i++){
+            gameInfoBtn=$("<p>").addClass.text(results)
+            listItem.append(gameInfo)
+            console.log(gameInfo)
+
+            ("#resultsList").append(listItem)
+      }
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
