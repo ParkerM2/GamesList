@@ -1,13 +1,15 @@
-
+// dependencies
 var validationResult = require('express-validator');
 var loginService = require('../Services/login-service');
 
+// returning the rendered login page
 let getPageLogin = (req, res) => {
     return res.render("login.handlebars", {
         errors: req.flash("errors")
     });
 };
 
+// function for valdating the login results with express-validator
 let handleLogin = async (req, res) => {
     let errorsArr = [];
     let validationErrors = validationResult(req);
@@ -29,6 +31,7 @@ let handleLogin = async (req, res) => {
     }
 };
 
+// function to check to see if a user is logged in
 let checkLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
         return res.redirect("/login");
@@ -36,6 +39,7 @@ let checkLoggedIn = (req, res, next) => {
     next();
 };
 
+// function to check to see if a user is logged out
 let checkLoggedOut = (req, res, next) => {
     if (req.isAuthenticated()) {
         return res.redirect("/");
@@ -43,6 +47,7 @@ let checkLoggedOut = (req, res, next) => {
     next();
 };
 
+// function to logout a user
 let postLogOut = (req, res) => {
     req.session.destroy(function(err) {
         return res.redirect("/login");
