@@ -1,7 +1,11 @@
-
+//dependencies
 var DBConnection = require('../config/DBConnection');
 var bcrypt = require('bcrypt');
 
+// function to handle the login info and parse to other functions to
+// pull from the msql db to compare emails, then to compare the given password
+// through passport and express-validator to decide if the given pass is = to the hashed
+// password in the msql db
 let handleLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         //check email is exist or not
@@ -63,8 +67,8 @@ let findUserById = (id) => {
 
 let comparePassword = (password, userObject) => {
     return new Promise(async (resolve, reject) => {
-        console.log(userObject.user_password)
-        console.log("compare", password)
+        // console.log(userObject.user_password, " hashed password in 'comparepassword login-service.js'")
+        // console.log("compare to the inputed password on website", password)
         try {
             await bcrypt.compare(password, userObject.user_password).then((isMatch) => {
                 if (isMatch) {

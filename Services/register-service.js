@@ -1,9 +1,14 @@
-
+//dependencies
 var DBConnection = require('./../config/DBConnection');
 var bcrypt = require('bcrypt')
 
+// function for the creating of a new user
+// using bcrypt to give a hashed password
+// using express-validator to confirm both passwords match on the form
+// and pushing all this info to the msql db, while checking to make sure the email
+// hasn't already been used 
 let createNewUser = (data) => {
-    console.log(data," in createNewUser")
+    // console.log(data," in createNewUser")
     return new Promise(async (resolve, reject) => {
         // check email is exist or not
         let isEmailExist = await checkExistEmail(data.email);
@@ -27,6 +32,7 @@ let createNewUser = (data) => {
                     if (err) {
                         reject(false)
                     }
+                    console.log("Create a new user success!")
                     resolve("Create a new user successful");
                 }
             );
@@ -34,8 +40,7 @@ let createNewUser = (data) => {
     });
 };
 
-;
-
+// Querying the mysql db to check if an email is already being used
 let checkExistEmail = (email) => {
     return new Promise( (resolve, reject) => {
         try {
