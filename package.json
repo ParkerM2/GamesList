@@ -13,6 +13,7 @@
     "express-handlebars": "^5.2.0",
     "handlebars": "^4.7.6",
     "mysql": "^2.18.1",
-    "node": "^15.0.1"
+    "node": "^15.0.1",
+    "sql": "^0.78.0"
   }
 }

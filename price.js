@@ -1,3 +1,5 @@
+const { title } = require("process");
+
 $(document).ready(function () {
       $("#searchApiBtn").on("click", function (e) {
             e.preventDefault();
@@ -26,12 +28,10 @@ $(document).ready(function () {
                   let listItem = $("<p id='listItem'></p>");
                   $(".navbar-brand").html(gameTitle);
                        
-                  // console.log(gameInfo.Gname)
-                  // showResults.push(gameInfo)
+                 
 
             }
-                  // store info into a string 
-                  // localStorage.setItem('gameKey', JSON.stringify(showResults))
+       
            
        ) })})
 
