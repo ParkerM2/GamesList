@@ -27,17 +27,3 @@ function initialize (passport, getUserByEmail, getUserByID) {
 };
 
 module.exports = initialize;
-
-// express documentation of the verify callback function.. still saying that it's requiring a verify callback
-
-
-// passport.use(new LocalStrategy(
-//     function(username, password, done) {
-//       User.findOne({ username: username }, function (err, user) {
-//         if (err) { return done(err); }
-//         if (!user) { return done(null, false); }
-//         if (!user.verifyPassword(password)) { return done(null, false); }
-//         return done(null, user);
-//       });
-//     }
-//   ));
