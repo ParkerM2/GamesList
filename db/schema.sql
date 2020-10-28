@@ -12,3 +12,8 @@ CREATE TABLE users (
     user_game_list varchar(255),
     primary key (id)
 );
+
+CREATE TABLE games (
+    id INT NOT NULL AUTO_INCREMENT,
+    game_title VARCHAR(250)) NOT NULL,
+);
