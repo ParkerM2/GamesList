@@ -1,0 +1,87 @@
+<h1>Game collection</h1>
+
+<ul>
+  {{#each collection}}
+    <li>
+      <p>
+        {{this.id}}. {{this.game}}
+
+        <button data-gameid="{{this.id}}" class="delgame">Delete</button>
+      </p>
+    </li>
+  {{/each}}
+</ul>
+
+<h2>Add a game</h2>
+<form id="addmovie" class="button-size">
+	<textarea type="text" name="movie"></textarea>
+	<button type="submit">Save game!</button>
+</form>
+
+<h2>Update a game </h2>
+<form id="updatemovie" class="button-size">
+  <input type="text" name="id" placeholder="id">
+	<textarea type="text" name="movie" placeholder="what do you want to update this movie title to?"></textarea>
+	<button type="submit">Update game!</button>
+</form>
+
+<script type="text/javascript">
+  $(".delgame").on("click", function(event) {
+    var id = $(this).data("gameid");
+
+    // Send the DELETE request.
+    $.ajax("/api/games/" + id, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $("#addgame").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    var newGame = {
+      game: $("#addgame [name=game]").val().trim()
+    };
+
+    // Send the POST request.
+    $.ajax("/api/games/", {
+      type: "POST",
+      data: newGame
+    }).then(
+      function() {
+        console.log("added new game");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $("#updateGame").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    var id = $("[name=id]").val().trim();
+
+    var updatedMovie = {
+      movie: $("#updateGame [name=game]").val().trim()
+    };
+
+    // Send the PUT request.
+    $.ajax("/api/games/" + id, {
+      type: "PUT",
+      data: updatedGame
+    }).then(
+      function() {
+        console.log("updated id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+</script>
