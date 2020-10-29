@@ -2,7 +2,7 @@ const axios = require('axios');
 const userPageRoute = require("../routes/userpage-routes")
 
 
-function getAPI (res) {
+module.exports = function (data) {
     axios({
         "method":"GET",
         "url":"https://chicken-coop.p.rapidapi.com/games/%7BHalf-Life%7D",
@@ -23,15 +23,17 @@ function getAPI (res) {
           description : response.data.result.description,
         }
         console.log( data )
-        return data;
         // res.send(data)
         })
         .catch((error)=>{
           console.log(error)
         })
+        return data;
+
       }
 
-      module.exports = {
-        getAPI : getAPI,
-        data : this.data,
-      }
+     // module.exports = {getAPI:getAPI};
+      // module.exports = {
+      //   getAPI : getAPI,
+      //   data : this.data,
+      // }

@@ -6,13 +6,13 @@ module.exports = function (Sequelize, DataTypes) {
       password: DataTypes.STRING,
   });
 
-//   User.associate = function(models) {
-//     // Associating User with games
-//     // When an User is deleted, also delete any associated Posts
-//     User.hasMany(models.Games, {
-//       onDelete: "cascade"
-//     });
-//   };
+  User.associate = function(models) {
+    // Associating User with games
+    // When an User is deleted, also delete any associated Posts
+    models.User.hasMany(models.Game, {
+      foreignKey: "userId"
+    });
+  };
 
   return User;
 };
