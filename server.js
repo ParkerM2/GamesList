@@ -2,6 +2,7 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
+const chickenApi = require('./routes/chicken-api-route');
 
 const express = require("express");
 
@@ -56,9 +57,13 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
+
+
 // init all web routes
 initWebRoutes(app);
 apiRoute.userPageRender(app)
+
+// await chickenApi.searchAPI("half-Life");
 
 let port = process.env.PORT || 8080;
 
