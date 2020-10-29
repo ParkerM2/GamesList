@@ -1,4 +1,5 @@
 const axios = require('axios');
+const userPageRoute = require("../routes/userpage-routes")
 
 
 function getAPI (res) {
@@ -22,7 +23,7 @@ function getAPI (res) {
           description : response.data.result.description,
         }
         console.log( data )
-        
+        return data;
         // res.send(data)
         })
         .catch((error)=>{
@@ -30,4 +31,7 @@ function getAPI (res) {
         })
       }
 
-      module.exports = getAPI;
+      module.exports = {
+        getAPI : getAPI,
+        data : this.data,
+      }

@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "hu8b)HF(pyHP&TZ#vprONptaG7oHd9",
+    "password": "",
     "database": "game_db",
     "host": "localhost",
     "port": 3306,
