@@ -10,7 +10,7 @@ let handleLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         //check email is exist or not
         let user = await findUserByEmail(email);
-        console.log(user)
+        // console.log(user)
         if (user) {
             //compare password
             await bcrypt.compare(password, user.password).then((isMatch) => {
