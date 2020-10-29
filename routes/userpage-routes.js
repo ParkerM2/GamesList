@@ -11,10 +11,11 @@ app.get("/user", async function (req, res) {
     // await controller.data;
     console.log(controller)
     //res.render("user.handlebars", controller.getAPI)
+    let data = await controller.getAPI(res);
+    
     console.log("after res =>","userpagerouteline8");
 
   });
 
 }
-
 module.exports = {userPageRender : userPageRender}

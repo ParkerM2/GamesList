@@ -56,9 +56,13 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
+
+
 // init all web routes
 initWebRoutes(app);
 apiRoute.userPageRender(app)
+
+// await chickenApi.searchAPI("half-Life");
 
 let port = process.env.PORT || 8080;
 
