@@ -22,6 +22,11 @@ const cookieParser = require('cookie-parser');
 
 const bodyParser = require('body-parser');
 
+// const getAPI = require('./controllers/user-controller');
+
+// getAPI();
+const apiRoute = require('./routes/userpage-routes');
+
 //use cookie parser
 app.use(cookieParser('secret'));
 
@@ -56,6 +61,7 @@ app.use(passport.session());
 
 // init all web routes
 initWebRoutes(app);
+apiRoute.userPageRender(app)
 
 // await chickenApi.searchAPI("half-Life");
 
