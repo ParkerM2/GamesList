@@ -1,4 +1,4 @@
 node_modules
+config/config.json
 config
-config.json
 .env
