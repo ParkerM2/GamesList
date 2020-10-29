@@ -34,18 +34,18 @@ connection.connect(function(err) {
 
 // Use Handlebars to render the main index.html page with the movies in it.
 app.get("/", function(req, res) {
-  connection.query("SELECT * FROM collections;", function(err, data) {
+  connection.query("SELECT * FROM games;", function(err, data) {
     if (err) {
       return res.status(500).end();
     }
 
-    res.render("index", { colections: data });
+    res.render("index", { games: data });
   });
 });
 
 // Create a new game list 
 app.post("/api/games", function(req, res) {
-  connection.query("INSERT INTO collections (game) VALUES (?)", [req.body.game], function(err, result) {
+  connection.query("INSERT INTO games (game) VALUES (?)", [req.body.game], function(err, result) {
     if (err) {
       return res.status(500).end();
     }
@@ -58,7 +58,7 @@ app.post("/api/games", function(req, res) {
 
 // Retrieve all games
 app.get("/api/games", function(req, res) {
-  connection.query("SELECT * FROM collections;", function(err, data) {
+  connection.query("SELECT * FROM games;", function(err, data) {
     if (err) {
       return res.status(500).end();
     }
@@ -69,7 +69,7 @@ app.get("/api/games", function(req, res) {
 
 // Update a game
 app.put("/api/games/:id", function(req, res) {
-  connection.query("UPDATE collections SET game = ? WHERE id = ?", [req.body.game, req.params.id], function(err, result) {
+  connection.query("UPDATE games SET game = ? WHERE id = ?", [req.body.game, req.params.id], function(err, result) {
     if (err) {
       // If an error occurred, send a generic server failure
       return res.status(500).end();
@@ -85,7 +85,7 @@ app.put("/api/games/:id", function(req, res) {
 
 // Delete a game
 app.delete("/api/games/:id", function(req, res) {
-  connection.query("DELETE FROM collections WHERE id = ?", [req.params.id], function(err, result) {
+  connection.query("DELETE FROM games WHERE id = ?", [req.params.id], function(err, result) {
     if (err) {
       // If an error occurred, send a generic server failure
       return res.status(500).end();

@@ -21,14 +21,13 @@
 <h2>Update a game</h2>
 <form id="updategame" class="button-size">
   <input type="text" name="id" placeholder="id">
-	<textarea type="text" name="game" placeholder="what do you want to update this movie title to?"></textarea>
+	<textarea type="text" name="game" placeholder="what do you want to update this game title to?"></textarea>
 	<button type="submit">Update game</button>
 </form>
 
 <script type="text/javascript">
   $(".delgame").on("click", function(event) {
     var id = $(this).data("gameid");
-
     // Send the DELETE request.
     $.ajax("/api/games/" + id, {
       type: "DELETE"
@@ -40,15 +39,12 @@
       }
     );
   });
-
   $("#addgame").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
-
     var newGame = {
       game: $("#addgame [name=game]").val().trim()
     };
-
     // Send the POST request.
     $.ajax("/api/games", {
       type: "POST",
@@ -61,17 +57,13 @@
       }
     );
   });
-
   $("#updategame").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
-
     var id = $("[name=id]").val().trim();
-
     var updatedGame = {
       game: $("#updategame [name=game]").val().trim()
     };
-
     // Send the PUT request.
     $.ajax("/api/games/" + id, {
       type: "PUT",
