@@ -21,6 +21,10 @@ const cookieParser = require('cookie-parser');
 
 const bodyParser = require('body-parser');
 
+const getAPI = require('./controllers/user-controller');
+
+getAPI();
+
 //use cookie parser
 app.use(cookieParser('secret'));
 
