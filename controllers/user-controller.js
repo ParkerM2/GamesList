@@ -1,5 +1,5 @@
 const axios = require('axios');
-const userPageRoute = require("../routes/userpage-routes")
+// const userPageRoute = require("../routes/userpage-routes")
 
 
 function getAPI (res) {
@@ -22,8 +22,12 @@ function getAPI (res) {
           title : response.data.result.title,
           description : response.data.result.description,
         }
-        console.log( data )
-        return data;
+        // console.log( data )
+        let user_name = localStorage.getItem('user')
+        console.log(user_name)
+        console.log("*************^^^ line 27 res user-controller")
+        console.log("above res.render line 26 user-controller")
+        res.render("user", data)
         // res.send(data)
         })
         .catch((error)=>{
@@ -32,6 +36,5 @@ function getAPI (res) {
       }
 
       module.exports = {
-        getAPI : getAPI,
-        data : this.data,
+        getAPI:getAPI
       }

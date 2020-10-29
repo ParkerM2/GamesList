@@ -2,7 +2,6 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-const chickenApi = require('./routes/chicken-api-route');
 
 const express = require("express");
 

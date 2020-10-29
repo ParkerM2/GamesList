@@ -7,12 +7,10 @@ let userPageRender = function (app) {
 
 app.get("/user", async function (req, res) {
     console.log(" before res=>","user page line 7");
-    await controller.getAPI;
-    await controller.data;
-    res.render("user.handlebars", data)
+    let data = await controller.getAPI(res);
+    
     console.log("after res =>","userpagerouteline8");
   });
 
 }
-
 module.exports = {userPageRender : userPageRender}
