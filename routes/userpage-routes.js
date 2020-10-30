@@ -17,8 +17,8 @@ app.get("/user", async function (req, res) {
   });
 
 
-controller.getAPI(res)
-console.log(req.JSON.Parse(JSON.stringify(user)))
+// controller.getAPI(res)
+// console.log(req.JSON.Parse(JSON.stringify(user)))
 
-})}
+}
 module.exports = {userPageRender : userPageRender}
