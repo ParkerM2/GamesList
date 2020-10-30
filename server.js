@@ -5,6 +5,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require("express");
 
+const morgan = require("morgan");
+
 const passport = require('passport');
 
 const app = express();
@@ -25,6 +27,8 @@ const bodyParser = require('body-parser');
 
 // getAPI();
 const apiRoute = require('./routes/userpage-routes');
+
+app.use(morgan('tiny'));
 
 //use cookie parser
 app.use(cookieParser('secret'));

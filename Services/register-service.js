@@ -26,16 +26,17 @@ let createNewUser = (data) => {
             };
 
             //create a new account
-            DBConnection.query(
+            let query = DBConnection.query(
                 ' INSERT INTO users set ? ', user,
                 function(err, rows) {
                     if (err) {
-                        reject(false)
+                        return reject("Create user failed")
                     }
                     console.log("Create a new user success!")
                     resolve("Create a new user successful");
                 }
             );
+            console.log(query.sql);
         }
     });
 };
