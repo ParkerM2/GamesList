@@ -1,8 +1,14 @@
 const axios = require('axios');
+
 const homepage = require('./home-page')
 const express = require('express');
 const app = express();
 function getAPI (res) {
+
+
+
+
+module.exports = function (data) {
     axios({
         "method":"GET",
         "url":"https://chicken-coop.p.rapidapi.com/games/%7BHalf-Life%7D",
@@ -33,6 +39,8 @@ function getAPI (res) {
         .catch((error)=>{
           console.log(error)
         })
+        return data;
+
       }
 
       module.exports = {
