@@ -1,4 +1,5 @@
 const express = require('express')
+var controller = require("../config/DBConnection")
 var app = express();
 
 var controller = require('../controllers/user-controller')
