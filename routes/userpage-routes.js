@@ -11,7 +11,7 @@ let userPageRender = function (app) {
 app.get("/user", async function (req, res) {
     console.log(" before res=>","user page line 7");
     controller.getAPI(res)
-    console.log(req.JSON.Parse(JSON.stringify(user)));
+    console.log(JSON.parse(JSON.stringify(req.user)));
     console.log("after res =>","userpagerouteline8");
 
   });

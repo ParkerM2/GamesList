@@ -9,11 +9,16 @@ CREATE TABLE users (
     user_name varchar(255) NOT NULL,
     user_password varchar(255) NOT NULL,
     user_pokemon varchar(255),
-    user_game_list varchar(255),
     primary key (id)
 );
 
 CREATE TABLE games (
     id INT NOT NULL AUTO_INCREMENT,
-    game_title VARCHAR(250)) NOT NULL,
+    game_title VARCHAR(250) NOT NULL,
+    user_id INT,
+    FOREIGN KEY (id) REFERENCES users(id)
 );
+
+  -- Creates a boolean column called "mastered" which will automatically fill --
+  -- with true when a new row is made and the value isn't otherwise defined. --
+--   mastered BOOLEAN DEFAULT true,
