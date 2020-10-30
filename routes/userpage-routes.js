@@ -1,4 +1,5 @@
 const express = require('express')
+var controller = require("../config/DBConnection")
 var app = express();
 
 var controller = require('../controllers/user-controller')
@@ -16,8 +17,8 @@ app.get("/user", async function (req, res) {
   });
 
 
-controller.getAPI(res)
-console.log(req.JSON.Parse(JSON.stringify(user)))
+// controller.getAPI(res)
+// console.log(req.JSON.Parse(JSON.stringify(user)))
 
-})}
+}
 module.exports = {userPageRender : userPageRender}

@@ -8,7 +8,7 @@ function getAPI (res) {
 
 
 
-module.exports = function (data) {
+
     axios({
         "method":"GET",
         "url":"https://chicken-coop.p.rapidapi.com/games/%7BHalf-Life%7D",
@@ -42,7 +42,7 @@ module.exports = function (data) {
         .catch((error)=>{
           console.log(error)
         })
-        return data;
+        
 
       }
 
