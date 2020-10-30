@@ -21,7 +21,9 @@ function getAPI (res) {
         "platform":"pc"
         }
         })
-        .then((response)=>{
+        .then((response)=>{      
+        console.log("*************^^^ line 27 res user-controller")
+        console.log("above res.render line 26 user-controller")
        let data = {
         img : response.data.result.image,
         score : response.data.result.score,
@@ -33,6 +35,7 @@ function getAPI (res) {
       // console.log(JSON.stringify(req.res.user), "req line 27 ************** user-controller");
       // console.log(res, "res ********** line 28 user-controller")
         // console.log( data, "inside of user-controller - currently working" )
+
         res.render("user", data)
         // res.send(data)
         })
