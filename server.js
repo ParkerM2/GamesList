@@ -24,7 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
   // const getAPI = require('./controllers/user-controller');
   
   // getAPI();
-  const apiRoute = require('./routes/userpage-routes');
+  const apiRoute = require('./routes/user-routes');
   
   //use cookie parser
   app.use(cookieParser('secret'));
