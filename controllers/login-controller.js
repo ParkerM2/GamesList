@@ -4,7 +4,7 @@ var loginService = require('../Services/login-service');
 
 // returning the rendered login page
 let getPageLogin = (req, res) => {
-    return res.render("login.handlebars", {
+    return res.render("login", {
         errors: req.flash("errors")
     });
 };

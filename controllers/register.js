@@ -5,7 +5,7 @@ const {validationResult} = require('express-validator');
 // Express-validator docs link -> https://express-validator.github.io/docs/
 // sending the register handlebars page
 let getPageRegister = (req, res) => {
-    return res.render("register.handlebars", {
+    return res.render("register", {
         errors: req.flash("errors")
     });
 };
