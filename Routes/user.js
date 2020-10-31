@@ -1,4 +1,5 @@
 //dependencies
+var app = require('express')();
 var express = require('express')
 var homePageController = require("../controllers/home-page");
 var registerController = require("../controllers/register");

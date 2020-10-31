@@ -7,10 +7,4 @@ $(document).ready(function () {
     
     
     
-    
-    
-    
-    
-    
-    
 })    
