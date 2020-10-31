@@ -2,7 +2,7 @@ const axios = require('axios');
 // const userPageRoute = require("../routes/userpage-routes")
 
 
-function getAPI (res) {
+async function getAPI (res) {
     axios({
         "method":"GET",
         "url":"https://chicken-coop.p.rapidapi.com/games/%7BHalf-Life%7D",
@@ -26,8 +26,9 @@ function getAPI (res) {
     
         console.log("*************^^^ line 27 res user-controller")
         console.log("above res.render line 26 user-controller")
-        res.render("user", data)
+        // res.render("user", data)
         // res.send(data)
+        return data;
         })
         .catch((error)=>{
           console.log(error)

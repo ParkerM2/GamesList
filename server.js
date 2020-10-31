@@ -21,10 +21,13 @@ const cookieParser = require('cookie-parser');
 
 const bodyParser = require('body-parser');
 
+const path = require('path');
+
 // const getAPI = require('./controllers/user-controller');
 
 // getAPI();
 const apiRoute = require('./routes/userpage-routes');
+const { searchPageRender } = require('./routes/searchpage');
 
 //use cookie parser
 app.use(cookieParser('secret'));
@@ -41,7 +44,10 @@ app.use(session({
 
 app.set("view engine", "handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ 
+  defaultLayout: "main",
+  layoutsDir: path.join(__dirname, 'views/layouts')
+ }));
 
 // Enable body parser post data
 app.use(bodyParser.json());
@@ -61,6 +67,7 @@ app.use(passport.session());
 // init all web routes
 initWebRoutes(app);
 apiRoute.userPageRender(app)
+searchPageRender(app)
 
 // await chickenApi.searchAPI("half-Life");
 
