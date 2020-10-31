@@ -5,22 +5,15 @@
     <ul id="game_list" class="list-group">
       {{#each apiData}}
         <li class="list-group-item">
-          <a href="#">{{this.title}} ({{this.platform}})</a>
+          <a href="#" data-title="{{title}}" data-platform="{{platform}}">{{this.title}} ({{this.platform}})</a>
         </li>
       {{else}}
         <p>No results found!</p>
       {{/each}}
     </ul>
   </div>
-  <div class="col-7">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Game title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">I have this Game</a>
-      </div>
-    </div>
+  <div class="col-7" id="game_details">
+    
   </div>
 </div>
 
@@ -32,8 +25,11 @@ $(document).ready(function() {
     event.preventDefault();
     $('#game_list li').removeClass('active');
     $(event.target).parent('li').addClass('active');
-    let game_title = $(event.target).text();
-    $('.card-title').text(game_title);
+    let title = $(event.target).data('title');
+    let platform = $(event.target).data('platform');
+    $.get('/gameDetails', { title: title, platform: platform }).done(function(result) {
+      $('#game_details').html(result);
+    })
   })
 });
 </script>

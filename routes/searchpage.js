@@ -47,5 +47,40 @@ app.get("/search", async function (req, res) {
     })
 });
 
+app.get("/gameDetails", function(req, res) {
+    console.log("GET /gameDetails", req.query)
+    axios({
+        "method":"GET",
+        "url":"https://chicken-coop.p.rapidapi.com/games/" + encodeURIComponent(req.query.title),
+        "headers":{
+            "content-type":"application/octet-stream",
+            "x-rapidapi-host":"chicken-coop.p.rapidapi.com",
+            "x-rapidapi-key":"c23b869635mshbd93a4ffe3425ecp12d50bjsnae0f66b387be",
+            "useQueryString":true
+        },"params":{
+            "platform": encodePlatform(req.query.platform)
+        }
+    })
+    .then((response)=>{
+        let gameDetails = response.data.result;
+        gameDetails.layout = false
+        res.render("partials/games/game-details", gameDetails);
+    })
+    .catch((error)=>{
+        console.log(error)
+        res.status(500).end(error)
+    })
+});
 }
+
+function encodePlatform(platform) {
+    switch(platform.toLowerCase()) {
+        case 'ps4': return 'playstation-4';
+        case 'ps3': return 'playstation-3';
+        case 'ps2': return 'playstation-2';
+        // case 'xone': return 'xbox-one';
+        default: return platform.toLowerCase();
+    }
+}
+
 module.exports = {searchPageRender : searchPageRender}
