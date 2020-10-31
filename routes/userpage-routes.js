@@ -4,16 +4,14 @@ var app = express();
 var axios = require('axios');
 var controller = require('../controllers/user-controller')
 
-let userPageRender = async function (app) {
-
-
+let userPageRender = async function (app, title) {
 // get request
 app.get("/user", async function (req, res) {
     console.log(" before res=>","user page line 7");
     let user = JSON.parse(JSON.stringify(req.user));
     axios({
       "method":"GET",
-      "url":"https://chicken-coop.p.rapidapi.com/games/%7BHalf-Life%7D",
+      "url":"https://chicken-coop.p.rapidapi.com/games/%7B"+title+"%7D",
       "headers":{
       "content-type":"application/octet-stream",
       "x-rapidapi-host":"chicken-coop.p.rapidapi.com",

@@ -1,7 +1,27 @@
-<h1>The search page</h1>
-{{#each titles}}
-<ul>
-    <li><p>{{titles}}</p></li>
-    <li></li>
-</ul>
-{{/each}}
+<h1>Handlebars sucks</h1>
+
+<div class="game_list">
+  {{#each apiData}}
+    <button id="saveBtn" data="{{this.id}}">{{this.title}}</button>
+    <li>{{this.platform}}</li>
+  {{/each}}
+</div>
+<script type="text/javascript">
+let btn = document.getElementById("saveBtn");
+btn.addEventListener("click", function () {
+    var gameTitle = btn.innerText
+    var gameTit = btn.innerHTML;
+    console.log(gameTitle, "gameTitle");
+    console.log(gameTit);
+})
+$(document).ready(function() {
+    console.log("hello")
+    $("#saveBtn").on("click", function (e) {
+
+    e.preventDefault();
+    let btnText = $("#saveBtn").val()
+    console.log("in the btn on click function")
+    console.log(btnText, " btn Text");
+}
+)});
+</script>

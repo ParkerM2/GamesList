@@ -66,7 +66,7 @@ app.use(passport.session());
 
 // init all web routes
 initWebRoutes(app);
-apiRoute.userPageRender(app)
+apiRoute.userPageRender(app, "Half-Life")
 searchPageRender(app)
 
 // await chickenApi.searchAPI("half-Life");

@@ -3,11 +3,10 @@ const express = require('express');
 const app = express();
 
 
-let searchPageRender = async function (app) {
+let searchPageRender = async function (app, title) {
 
 app.get("/search", async function (req, res) {
     // let user = JSON.parse(JSON.stringify(req.user));
-    
     axios({
         "method":"GET",
         "url":"https://chicken-coop.p.rapidapi.com/games",
@@ -17,20 +16,31 @@ app.get("/search", async function (req, res) {
         "x-rapidapi-key":"c23b869635mshbd93a4ffe3425ecp12d50bjsnae0f66b387be",
         "useQueryString":true
         },"params":{
-        "title": "tomb raider"
+        "title": "half-life"
         }
     })
         .then((response)=>{
-        let titleObj = {
-            title: response.data.result[0].title,
-            title: response.data.result[1].title,
-            
-        };
-        console.log(titleObj.title)
+      
+        let apiData = {
+            apiData : response.data.result
+        }
         
-         console.log(titleObj, "title OBJ")
+
+        for (var i = 0; i < response.data.result.length; i++) {
+            apiData.apiData[i].id = i
+        }
+
+
+        // INSERT INTO games (game_title, id) VALUES (apiData.)
+        // let titleObj = {
+        //     title: response.data.result.title,
+        //     title: response.data[1].result.title,
+        //     title: response.data[2].result.title,
+        // };
+        // console.log(titleObj.title)
+        
         // console.log(titleObj)
-        res.render("search",titleObj)
+        res.render("search", apiData)
     })
         .catch((error)=>{
         console.log(error)
