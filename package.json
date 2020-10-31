@@ -12,6 +12,7 @@
     "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
