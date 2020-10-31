@@ -6,4 +6,9 @@ INSERT INTO users (email, user_name, user_password) VALUES ('m,@m.com','Marilyn 
 INSERT INTO users (email, user_name, user_password) VALUES ('lol@lol.com','miketyson','joerogan');
 INSERT INTO users (email, user_name, user_password) VALUES ('tm@tm.com','Owens','wowwowow');
 
-SELECT * FROM users
+
+
+INSERT INTO games (game_title, id) VALUES ("tom raider", "7");
+INSERT INTO games (game_title, id) VALUES ("mario", "7");
+
+
