@@ -1,27 +1,39 @@
-<h1>Handlebars sucks</h1>
+<h1>Search results</h1>
 
-<div class="game_list">
-  {{#each apiData}}
-    <button id="saveBtn" data="{{this.id}}">{{this.title}}</button>
-    <li>{{this.platform}}</li>
-  {{/each}}
+<div class="row">
+  <div class="col-5">
+    <ul id="game_list" class="list-group">
+      {{#each apiData}}
+        <li class="list-group-item">
+          <a href="#">{{this.title}} ({{this.platform}})</a>
+        </li>
+      {{else}}
+        <p>No results found!</p>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="col-7">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Game title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">I have this Game</a>
+      </div>
+    </div>
+  </div>
 </div>
-<script type="text/javascript">
-let btn = document.getElementById("saveBtn");
-btn.addEventListener("click", function () {
-    var gameTitle = btn.innerText
-    var gameTit = btn.innerHTML;
-    console.log(gameTitle, "gameTitle");
-    console.log(gameTit);
-})
-$(document).ready(function() {
-    console.log("hello")
-    $("#saveBtn").on("click", function (e) {
 
-    e.preventDefault();
-    let btnText = $("#saveBtn").val()
-    console.log("in the btn on click function")
-    console.log(btnText, " btn Text");
-}
-)});
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // document.getElementById('game_list').getElementsByTagName('a')
+  $('#game_list a').click(function(event) {
+    event.preventDefault();
+    $('#game_list li').removeClass('active');
+    $(event.target).parent('li').addClass('active');
+    let game_title = $(event.target).text();
+    $('.card-title').text(game_title);
+  })
+});
 </script>
