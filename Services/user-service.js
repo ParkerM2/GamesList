@@ -1,5 +1,9 @@
 const DBConnection = require('../config/DBConnection');
 
+let listGames = (user, callback) => {
+    DBConnection.query('SELECT * FROM `games` WHERE user_id = ?', user.id, callback);
+}
+
 let hasGame = (user, title, platform, callback) => {
   DBConnection.query(
       'SELECT * FROM `games` WHERE user_id = ? AND game_title = ? AND platform = ?',
@@ -24,5 +28,5 @@ let removeGame = (user, title, platform, callback) => {
 }
 
 module.exports = {
-  hasGame, addGame, removeGame
+  listGames, hasGame, addGame, removeGame
 }

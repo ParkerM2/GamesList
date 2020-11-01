@@ -1,14 +1,11 @@
 
-<h1></h1>
 <h1>{{user.user_name}}'s Game List</h1>
 
-<h1>{{apiData}}</h1>
-
-<image src="{{img}}"></image>
-
-<h1>{{description}}</h1>
-
-<h1>{{score}}</h1>
+<ul>
+    {{#each games}}
+        <li>{{ game_title }} ({{ platform }})</li>
+    {{/each}}
+</ul>
 
 
 

@@ -23,12 +23,8 @@ app.get("/search", loginController.checkLoggedIn, async function (req, res) {
         .then((response)=>{
       
         let apiData = {
-            apiData : response.data.result
-        }
-        
-
-        for (var i = 0; i < response.data.result.length; i++) {
-            apiData.apiData[i].id = i
+            apiData : response.data.result,
+            query: req.query.q
         }
 
 
