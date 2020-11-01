@@ -31,5 +31,28 @@ $(document).ready(function() {
       $('#game_details').html(result);
     })
   })
+
+  $('#game_details').on('click', '.btn', function(event) {
+    let $button  = $(event.target);
+    let title    = $button.data('title');
+    let platform = $button.data('platform');
+    let action   = $button.data('action');
+    $button.attr('disabled', true)
+
+    $.post('/user/' + action + 'Game', { title: title, platform: platform }).done(function(result) {
+      if (action === 'add') {
+        $button.removeClass('btn-primary').addClass('btn-danger');
+        $button.text("Remove game");
+        $button.data('action', 'remove');
+      } else {
+        $button.removeClass('btn-danger').addClass('btn-primary');
+        $button.text("Add game");
+        $button.data('action', 'add');
+      } 
+      $button.attr('disabled', false);
+    }).fail(function() {
+      alert("Failed to update user");
+    })
+  });
 });
 </script>

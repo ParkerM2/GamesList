@@ -1,11 +1,12 @@
 const axios = require('axios');
 const express = require('express');
 const app = express();
-
+const loginController = require('../controllers/login-controller')
+const userService = require('../Services/user-service');
 
 let searchPageRender = async function (app, title) {
 
-app.get("/search", async function (req, res) {
+app.get("/search", loginController.checkLoggedIn, async function (req, res) {
     // let user = JSON.parse(JSON.stringify(req.user));
     axios({
             "method":"GET",
@@ -63,8 +64,12 @@ app.get("/gameDetails", function(req, res) {
     })
     .then((response)=>{
         let gameDetails = response.data.result;
-        gameDetails.layout = false
-        res.render("partials/games/game-details", gameDetails);
+        gameDetails.platform = encodePlatform(req.query.platform);
+        userService.hasGame(req.user, req.query.title, gameDetails.platform, function(err, result) {
+            gameDetails.hasGame = result;
+            gameDetails.layout = false;
+            res.render("partials/games/game-details", gameDetails);
+        });    
     })
     .catch((error)=>{
         console.log(error)

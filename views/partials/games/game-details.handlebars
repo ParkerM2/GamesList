@@ -1,9 +1,13 @@
 <div class="card">
     {{!-- <img src="{{ image }}" class="card-img-top" alt="{{ title }}"> --}}
     <div class="card-body">
-    <h5 class="card-title">{{ title }}</h5>
-    <p class="card-text">{{ description }}</p>
-    <a href="#" class="btn btn-primary">I have this Game</a>
+        <h5 class="card-title">{{ title }}</h5>
+        <p class="card-text">{{ description }}</p>
+        {{#if hasGame}}
+            <button class="btn btn-danger" data-action="remove" data-title="{{ title }}" data-platform="{{ platform }}">Remove Game</button>
+        {{else}}
+            <button class="btn btn-primary" data-action="add" data-title="{{ title }}" data-platform="{{ platform }}">Add Game</button>
+        {{/if}}
     </div>
 </div>
 

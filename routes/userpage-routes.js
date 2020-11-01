@@ -1,8 +1,9 @@
 const express = require('express')
-var controller = require("../config/DBConnection")
+var DBConnection = require("../config/DBConnection")
 var app = express();
 var axios = require('axios');
-var controller = require('../controllers/user-controller')
+var loginController = require('../controllers/login-controller');
+const userService = require('../Services/user-service');
 
 let userPageRender = async function (app, title) {
 // get request
@@ -41,7 +42,19 @@ app.get("/user", async function (req, res) {
     // console.log(JSON.parse(JSON.stringify(req.user)));
     // console.log("after res =>","userpagerouteline8");
 
+app.post('/user/addGame', function(req, res) { 
+  userService.addGame(req.user, req.body.title, req.body.platform, function (err, results) {
+      if (err) {throw err}
+      res.status(201).send('Created');
+  });
+});
 
+app.post('/user/removeGame', function(req, res) {
+  userService.removeGame(req.user, req.body.title, req.body.platform, function (err, results) {
+      if (err) {throw err}
+      res.status(200).send('Success');
+  });
+})
 
 // controller.getAPI(res)
 // console.log(req.JSON.Parse(JSON.stringify(user)))
