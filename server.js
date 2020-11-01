@@ -5,6 +5,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require("express");
 
+const morgan = require("morgan");
+
 const passport = require('passport');
 
 const app = express();
@@ -28,6 +30,8 @@ const path = require('path');
 // getAPI();
 const apiRoute = require('./routes/userpage-routes');
 const { searchPageRender } = require('./routes/searchpage');
+
+app.use(morgan('tiny'));
 
 //use cookie parser
 app.use(cookieParser('secret'));
@@ -70,6 +74,8 @@ apiRoute.userPageRender(app, "Half-Life")
 searchPageRender(app)
 
 // await chickenApi.searchAPI("half-Life");
+
+app.use(express.static(__dirname + '/public'));
 
 let port = process.env.PORT || 8080;
 

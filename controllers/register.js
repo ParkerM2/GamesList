@@ -33,7 +33,7 @@ let createNewUser = async (req, res) => {
         user_name: req.body.user_name,
         user_password: req.body.password,
         user_pokemon: null,
-        user_game_list: null,
+        //user_game_list: null,
     };
     try {
         await registerService.createNewUser(newUser);

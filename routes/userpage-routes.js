@@ -1,47 +1,37 @@
 const express = require('express')
-var controller = require("../config/DBConnection")
+var DBConnection = require("../config/DBConnection")
 var app = express();
 var axios = require('axios');
-var controller = require('../controllers/user-controller')
+var loginController = require('../controllers/login-controller');
+const userService = require('../Services/user-service');
 
 let userPageRender = async function (app, title) {
 // get request
 app.get("/user", async function (req, res) {
-    console.log(" before res=>","user page line 7");
-    let user = JSON.parse(JSON.stringify(req.user));
-    axios({
-      "method":"GET",
-      "url":"https://chicken-coop.p.rapidapi.com/games/%7B"+title+"%7D",
-      "headers":{
-      "content-type":"application/octet-stream",
-      "x-rapidapi-host":"chicken-coop.p.rapidapi.com",
-      "x-rapidapi-key":"c23b869635mshbd93a4ffe3425ecp12d50bjsnae0f66b387be",
-      "useQueryString":true
-      },"params":{
-      "platform":"pc"
-      }
+      userService.listGames(req.user, function(err, games){
+          // Renders the user.handlebars page and sends it the data obj 
+          // that contains the requested image/score/title/description and also grabs the user data
+          res.render("user", { user: req.user, games: games })
       })
-      .then((response)=>{
-      let data = {
-        img : response.data.result.image,
-        score : response.data.result.score,
-        title : response.data.result.title,
-        description : response.data.result.description,
-        user: user,
-      }
-      // Renders the user.handlebars page and sends it the data obj 
-      // that contains the requested image/score/title/description and also grabs the user data
-      res.render("user", data)
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
+    
 });
     // controller.getAPI(res)
     // console.log(JSON.parse(JSON.stringify(req.user)));
     // console.log("after res =>","userpagerouteline8");
 
+app.post('/user/addGame', function(req, res) { 
+  userService.addGame(req.user, req.body.title, req.body.platform, function (err, results) {
+      if (err) {throw err}
+      res.status(201).send('Created');
+  });
+});
 
+app.post('/user/removeGame', function(req, res) {
+  userService.removeGame(req.user, req.body.title, req.body.platform, function (err, results) {
+      if (err) {throw err}
+      res.status(200).send('Success');
+  });
+})
 
 // controller.getAPI(res)
 // console.log(req.JSON.Parse(JSON.stringify(user)))

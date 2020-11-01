@@ -1,27 +1,62 @@
-<h1>Handlebars sucks</h1>
-
-<div class="game_list">
-  {{#each apiData}}
-    <button id="saveBtn" data="{{this.id}}">{{this.title}}</button>
-    <li>{{this.platform}}</li>
-  {{/each}}
+<div class="col-6 my-4">
+{{> search-form }}
 </div>
-<script type="text/javascript">
-let btn = document.getElementById("saveBtn");
-btn.addEventListener("click", function () {
-    var gameTitle = btn.innerText
-    var gameTit = btn.innerHTML;
-    console.log(gameTitle, "gameTitle");
-    console.log(gameTit);
-})
-$(document).ready(function() {
-    console.log("hello")
-    $("#saveBtn").on("click", function (e) {
 
-    e.preventDefault();
-    let btnText = $("#saveBtn").val()
-    console.log("in the btn on click function")
-    console.log(btnText, " btn Text");
-}
-)});
+<h1>Search results</h1>
+
+<div class="row">
+  <div class="col-5">
+    <ul id="game_list" class="list-group">
+      {{#each apiData}}
+        <li class="list-group-item">
+          <a href="#" data-title="{{title}}" data-platform="{{platform}}">{{this.title}} ({{this.platform}})</a>
+        </li>
+      {{else}}
+        <p>No results found!</p>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="col-7" id="game_details">
+    
+  </div>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // document.getElementById('game_list').getElementsByTagName('a')
+  $('#game_list a').click(function(event) {
+    event.preventDefault();
+    $('#game_list li').removeClass('active');
+    $(event.target).parent('li').addClass('active');
+    let title = $(event.target).data('title');
+    let platform = $(event.target).data('platform');
+    $.get('/gameDetails', { title: title, platform: platform }).done(function(result) {
+      $('#game_details').html(result);
+    })
+  })
+
+  $('#game_details').on('click', '.btn', function(event) {
+    let $button  = $(event.target);
+    let title    = $button.data('title');
+    let platform = $button.data('platform');
+    let action   = $button.data('action');
+    $button.attr('disabled', true)
+
+    $.post('/user/' + action + 'Game', { title: title, platform: platform }).done(function(result) {
+      if (action === 'add') {
+        $button.removeClass('btn-primary').addClass('btn-danger');
+        $button.text("Remove game");
+        $button.data('action', 'remove');
+      } else {
+        $button.removeClass('btn-danger').addClass('btn-primary');
+        $button.text("Add game");
+        $button.data('action', 'add');
+      } 
+      $button.attr('disabled', false);
+    }).fail(function() {
+      alert("Failed to update user");
+    })
+  });
+});
 </script>
