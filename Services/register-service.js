@@ -27,7 +27,7 @@ let createNewUser = (data) => {
                 pokemon_name: null,
                 pokemon_img: null,
             };
-            
+
             let randomNum = Math.floor(Math.random() * 100);
             if (user.user_pokemon === null) {
                 await axios({
@@ -37,7 +37,6 @@ let createNewUser = (data) => {
                     user.user_pokemon = true;
                     user.pokemon_name = response.data.name;
                     user.pokemon_img = response.data.sprites.front_default
-                
             //create a new account
             DBConnection.query(
                 ' INSERT INTO users set ? ', user,
@@ -54,8 +53,6 @@ let createNewUser = (data) => {
         };
     }
 )};
-
-
 
 // Querying the mysql db to check if an email is already being used
 let checkExistEmail = (email) => {

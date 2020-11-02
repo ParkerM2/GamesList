@@ -1,12 +1,55 @@
 
-<h1>{{user.user_name}}'s Game List</h1>
-
-<ul>
-    {{#each games}}
-        <li>{{ game_title }} ({{ platform }})</li>
-    {{/each}}
-</ul>
+{{!-- <h1>{{user.user_name}}'s Game List</h1> --}}
+{{!-- <h2>{{user.pokemon_name}}</h2> --}}
 
 
+<div class="card bg-dark text-white" style="margin: auto; margin-top: 10px;">
+    <div class="media mx-auto">
+        <img src="{{user.pokemon_img}}" class="" alt="Pokemon IMG">
+    </div>
+    <div class="media-body mx-auto">
+        <h5 class="mt-0">{{user.user_name}}'s Pokemon : {{user.pokemon_name}} </h5>
+    </div>
+</div>
+<br>
+<div class="jumbotron jumbotron-fluid" style="background-color:#D8DCFF; max-height:min-content;">
+    <div class="container">
+    <h1 class="display-5">{{user.user_name}}'s Game Dex !</h1>
+    <br>
+    <h1 class="display-4">Search here for titles of more games!</h1>
+    {{> search-form }}
+    {{#each apiData}}
+        <li class="list-group-item">
+          <a href="#" data-title="{{title}}" data-platform="{{platform}}">{{this.title}} ({{this.platform}})</a>
+        </li>
+      {{else}}
+        <p>No results found!</p>
+      {{/each}}
+</div>
+</div>
 
+
+{{!-- {{#each games}} --}}
+<div class="card float-left col-3" style="width: 18rem;display:flex;background-color:#D3EFBD; margin: 25px;">
+  <img src="{{game.img}}" class="card-img-top" alt="Game Icon via Chicken-Coop API">
+  <div class="card-body">
+    <h3>{{game_title}}"Game-Title Goes here"</h3> <br>
+     <h3>{{platform}}platform goes here</h3> <br>
+    <p class="card-text">{{game_description}}"Game-Description goes here"</p>
+  </div>
+</div>
+
+
+
+<div class="card float-left col-3" style="width: 18rem; display:flex; margin-top: 25px; margin: 25px;">
+  <img src="{{game.img}}" class="card-img-top" alt="Game Icon via Chicken-Coop API">
+  <div class="card-body">
+    <h3>{{game_title}}"Game-Title Goes here"</h3> <br>
+     <h3>{{platform}}platform goes here</h3> <br>
+    <p class="card-text">"Game-Description goes here"</p>
+  </div>
+</div>
+
+
+{{!-- {{/each}} --}}
 
