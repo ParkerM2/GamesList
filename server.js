@@ -25,10 +25,8 @@ const bodyParser = require('body-parser');
 
 const path = require('path');
 
-// const getAPI = require('./controllers/user-controller');
-
-// getAPI();
 const apiRoute = require('./routes/userpage-routes');
+
 const { searchPageRender } = require('./routes/searchpage');
 
 app.use(morgan('tiny'));
