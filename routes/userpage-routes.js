@@ -19,14 +19,14 @@ app.get("/user", async function (req, res) {
 });
 
 app.post('/user/addGame', function(req, res) { 
-  userService.addGame(req.user, req.body.title, req.body.platform, function (err, results) {
+  userService.addGame(req.user, req.body.id, req.body.title, function (err, results) {
       if (err) {throw err}
       res.status(201).send('Created');
   });
 });
 
 app.post('/user/removeGame', function(req, res) {
-  userService.removeGame(req.user, req.body.title, req.body.platform, function (err, results) {
+  userService.removeGame(req.user, req.body.id, function (err, results) {
       if (err) {throw err}
       res.status(200).send('Success');
   });

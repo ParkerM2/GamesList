@@ -1,12 +1,12 @@
 <div class="card">
-    {{!-- <img src="{{ image }}" class="card-img-top" alt="{{ title }}"> --}}
+    <img src="{{ background_image }}" class="card-img-top" alt="{{ title }}">
     <div class="card-body">
-        <h5 class="card-title">{{ title }}</h5>
-        <p class="card-text">{{ description }}</p>
+        <h5 class="card-title">{{ name }}</h5>
+        <p class="card-text">{{{ description }}}</p>
         {{#if hasGame}}
-            <button class="btn btn-danger" data-action="remove" data-title="{{ title }}" data-platform="{{ platform }}">Remove Game</button>
+            <button class="btn btn-danger" data-action="remove" data-game-id="{{ id }}" data-title="{{ name }}">Remove Game</button>
         {{else}}
-            <button class="btn btn-primary" data-action="add" data-title="{{ title }}" data-platform="{{ platform }}">Add Game</button>
+            <button class="btn btn-primary" data-action="add" data-game-id="{{ id }}" data-title="{{ name }}">Add Game</button>
         {{/if}}
     </div>
 </div>

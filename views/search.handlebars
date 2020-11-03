@@ -6,18 +6,18 @@
 <h1>Search results</h1>
 
 <div class="row">
-  <div class="col-5">
+  <div class="col-5 col-lg-3">
     <ul id="game_list" class="list-group">
-      {{#each apiData}}
+      {{#each results}}
         <li class="list-group-item">
-          <a href="#" data-title="{{title}}" data-platform="{{platform}}">{{this.title}} ({{this.platform}})</a>
+          <a href="#" data-game-id="{{id}}">{{name}}</a>
         </li>
       {{else}}
         <p>No results found!</p>
       {{/each}}
     </ul>
   </div>
-  <div class="col-7" id="game_details">
+  <div class="col-7 offset-lg-1" id="game_details">
     
   </div>
 </div>
@@ -30,21 +30,20 @@ $(document).ready(function() {
     event.preventDefault();
     $('#game_list li').removeClass('active');
     $(event.target).parent('li').addClass('active');
-    let title = $(event.target).data('title');
-    let platform = $(event.target).data('platform');
-    $.get('/gameDetails', { title: title, platform: platform }).done(function(result) {
+    let gameId = $(event.target).data('game-id');
+    $.get('/gameDetails', { id: gameId }).done(function(result) {
       $('#game_details').html(result);
     })
   })
 
   $('#game_details').on('click', '.btn', function(event) {
     let $button  = $(event.target);
+    let gameId   = $button.data('game-id');
     let title    = $button.data('title');
-    let platform = $button.data('platform');
     let action   = $button.data('action');
     $button.attr('disabled', true)
 
-    $.post('/user/' + action + 'Game', { title: title, platform: platform }).done(function(result) {
+    $.post('/user/' + action + 'Game', { id: gameId, title: title }).done(function(result) {
       if (action === 'add') {
         $button.removeClass('btn-primary').addClass('btn-danger');
         $button.text("Remove game");
