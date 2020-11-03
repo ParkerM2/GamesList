@@ -1,34 +1,12 @@
-{{> nav-bar}}
-<h1>Collection</h1>
+{{> nav-bar }}
 
-<ul>
-  {{#each collections}}
-    <li>
-      <p>
-        {{this.id}} {{this.data}}
-        {{data}}
+{{> wish-list-search }}
 
-        <button data-collectionid="{{this.id}}" class="delcollection">Delete</button>
-      </p>
-    </li>
-  {{/each}}
-</ul>
+{{> current-wish-list }}
 
-<h2>Add a Game to Watch</h2>
-<form  class="button-size">
-	<textarea type="text" name="collection"></textarea>
-	<button id="addCollection" type="submit">Save Game!</button>
-</form>
-
-<h2>Update a Game</h2>
-<form class="button-size">
-  <input type="text" name="id" placeholder="id">
-	<textarea type="text" name="collection" placeholder="what do you want to update this game title to?"></textarea>
-	<button id="updateCollection" type="submit">Update game!</button>
-</form>
-
+{{!-- code --}}
 <script type="text/javascript">
-  $(".delcollection").on("click", function(event) {
+  $("#delcollection").on("click", function(event) {
     var id = $(this).data("collectionid");
     // Send the DELETE request.
     $.ajax("/api/collections/" + id, {
@@ -36,16 +14,17 @@
     }).then(
       function() {
         console.log("deleted id ", id);
+      
         // Reload the page to get the updated list
         location.reload();
       }
     );
   });
-  $("#addCollection").on("submit", function(event) {
+  $("#addcollection").on("click", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
     var newCollection = {
-      collection: $("#addColletion [name=collection]").val().trim()
+      collection: $("#newName").val().trim()
     };
     // Send the POST request.
     $.ajax("/api/collections", {
@@ -59,12 +38,13 @@
       }
     );
   });
-  $("#updateCollection").on("submit", function(event) {
+  $("#updatecollection").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
     var id = $("[name=id]").val().trim();
+    
     var updatedCollection = {
-      collection: $("#updateCollection [name=collection]").val().trim()
+      collection: $("#updatecollection").val().trim()
     };
     // Send the PUT request.
     $.ajax("/api/collections/" + id, {
@@ -79,5 +59,3 @@
     );
   });
 </script>
-
-

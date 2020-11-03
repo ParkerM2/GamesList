@@ -1,23 +1,33 @@
-var DBConnection = require("./../config/DBConnection");
+const connection = require("./../config/DBConnection");
+
 
 let wishListRenderPage = function (app) {
+  app.get("/", function (req, res) {
+    connection.query("SELECT * FROM collections;", function (err, data) {
+      if (err) {
+        return res.status(500).end();
+      }
+      let user = JSON.parse(JSON.stringify(req.user));
+      console.log(data)
+      res.render('partial/current-wish-list', { collections: data, user: user })
+  })
+})
 // Use Handlebars to render the main index.html page with the movies in it.
 app.get("/collection", function(req, res) {
-  DBConnection.query("SELECT * FROM collections;", function(err, data) {
+  connection.query("SELECT * FROM collections;", function(err, data) {
     if (err) {
       return res.status(500).end();
     }
     let user = JSON.parse(JSON.stringify(req.user));
-    console.log(user, "user in app.get/collection")
     
-
-    res.render("wishlist", { collections: data, user: user });
+    // res.render('partial/current-wish-list', { collections: data, user: user })
+    res.render("wishlist", { collections: data, user: user })
   });
 });
 
 // Create a new movie
-app.post("/api/collection", function(req, res) {
-  DBConnection.query("INSERT INTO collections (collection) VALUES (?)", [req.body.collection], function(err, result) {
+app.post("/api/collections", function(req, res) {
+  connection.query("INSERT INTO collections (collection) VALUES (?)", [req.body.collection], function(err, result) {
     if (err) {
       return res.status(500).end();
     }
@@ -29,8 +39,8 @@ app.post("/api/collection", function(req, res) {
 });
 
 // Retrieve all movies
-app.get("/api/collection", function(req, res) {
-  DBConnection.query("SELECT * FROM collections;", function(err, data) {
+app.get("/api/collections", function(req, res) {
+  connection.query("SELECT * FROM collections;", function(err, data) {
     if (err) {
       return res.status(500).end();
     }
@@ -40,8 +50,8 @@ app.get("/api/collection", function(req, res) {
 });
 
 // Update a movie
-app.put("/api/collection/:id", function(req, res) {
-  DBConnection.query("UPDATE collections SET collection = ? WHERE id = ?", [req.body.collection, req.params.id], function(err, result) {
+app.put("/api/collections/:id", function(req, res) {
+  connection.query("UPDATE collections SET collection = ? WHERE id = ?", [req.body.collection, req.params.id], function(err, result) {
     if (err) {
       // If an error occurred, send a generic server failure
       return res.status(500).end();
@@ -56,8 +66,8 @@ app.put("/api/collection/:id", function(req, res) {
 });
 
 // Delete a movie
-app.delete("/api/collection/:id", function(req, res) {
-  DBConnection.query("DELETE FROM collections WHERE id = ?", [req.params.id], function(err, result) {
+app.delete("/api/collections/:id", function(req, res) {
+  connection.query("DELETE FROM collections WHERE id = ?", [req.params.id], function(err, result) {
     if (err) {
       // If an error occurred, send a generic server failure
       return res.status(500).end();

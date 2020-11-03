@@ -9,21 +9,13 @@
       </div>
     </div>
   </div>
+  
   <!-- First grid -->
   <div class="jumbotron jumbotron-fluid"style="background-color:#AEADF0">
     <div class="container">
         <img src="https://img.icons8.com/dusk/64/000000/collectibles.png" style="float:right">
-      <h1 class="display-4">Custom Game Collections</h1>
-      <h5 class="display-4">Create a custom game list and share with others.</h5>
-      <p class="lead" style="font-weight:bold">No longer use generic genres. Custom game lists allow for specific tastes
-    </p>
-    <li>Isometric Rpg's</li>
-    <li>Controller friendly</li>
-    <li>Space</li>
-    <li>Post-Apocolypic</li>
-    <li>Party Games</li>
-    <li>Total War Collection</li>
-    <li>Platforms</li>
+      <h1 class="display-4">Make A Wishlist</h1>
+        <h1>{{> current-wish-list }} </h1>
     </div>
   </div>
 <!-- Second Grid -->
@@ -41,6 +33,8 @@
     </div>
   </div>
 </div>
+
+{{> current-wish-list }}
 
 <script>
 // Used to toggle the menu on small screens when clicking on the menu button
