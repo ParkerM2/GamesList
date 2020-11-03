@@ -1,5 +1,5 @@
 //dependencies 
-var registerService = require('./../services/register-service');
+var registerService = require('./../Services/register-service');
 const {validationResult} = require('express-validator');
 
 // Express-validator docs link -> https://express-validator.github.io/docs/

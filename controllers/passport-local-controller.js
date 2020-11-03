@@ -1,7 +1,7 @@
 // dependencies 
 var passportLocal = require('passport-local');
 var passport = require('passport');
-var loginService = require('../services/login-service');
+var loginService = require('../Services/login-service');
 let LocalStrategy = passportLocal.Strategy;
 
 
