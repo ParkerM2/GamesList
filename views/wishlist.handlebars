@@ -1,10 +1,11 @@
-<h1>favorites</h1>
+<h1>Collection</h1>
 
 <ul>
   {{#each collections}}
     <li>
       <p>
-        {{this.id}}. {{this.collection}}
+        {{this.id}} {{this.data}}
+        {{data}}
 
         <button data-collectionid="{{this.id}}" class="delcollection">Delete</button>
       </p>
@@ -13,16 +14,16 @@
 </ul>
 
 <h2>Add a Game to Watch</h2>
-<form id="addcollection" class="button-size">
+<form  class="button-size">
 	<textarea type="text" name="collection"></textarea>
-	<button type="submit">Save Game!</button>
+	<button id="addCollection" type="submit">Save Game!</button>
 </form>
 
 <h2>Update a Game</h2>
-<form id="updatecollection" class="button-size">
+<form class="button-size">
   <input type="text" name="id" placeholder="id">
 	<textarea type="text" name="collection" placeholder="what do you want to update this game title to?"></textarea>
-	<button type="submit">Update game!</button>
+	<button id="updateCollection" type="submit">Update game!</button>
 </form>
 
 <script type="text/javascript">
@@ -39,11 +40,11 @@
       }
     );
   });
-  $("#addcollection").on("submit", function(event) {
+  $("#addCollection").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
     var newCollection = {
-      collection: $("#addcolletion [name=collection]").val().trim()
+      collection: $("#addColletion [name=collection]").val().trim()
     };
     // Send the POST request.
     $.ajax("/api/collections", {
@@ -57,12 +58,12 @@
       }
     );
   });
-  $("#updatecollection").on("submit", function(event) {
+  $("#updateCollection").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
     var id = $("[name=id]").val().trim();
     var updatedCollection = {
-      collection: $("#updatecollection [name=collection]").val().trim()
+      collection: $("#updateCollection [name=collection]").val().trim()
     };
     // Send the PUT request.
     $.ajax("/api/collections/" + id, {
@@ -79,87 +80,3 @@
 </script>
 
 
-
-var express = require("express");
-var exphbs = require("express-handlebars");
-var mysql = require("mysql");
-
-var app = express();
-
-
-initPassportLocal();
-
-let router = express.Router();
-router.get("/connection")
-// Use Handlebars to render the main index.html page with the movies in it.
-app.get("/collection", function(req, res) {
-  connection.query("SELECT * FROM collections;", function(err, data) {
-    if (err) {
-      return res.status(500).end();
-    }
-
-    res.render("index", { collections: data });
-  });
-});
-
-// Create a new movie
-app.post("/api/collection", function(req, res) {
-  connection.query("INSERT INTO collections (collection) VALUES (?)", [req.body.collection], function(err, result) {
-    if (err) {
-      return res.status(500).end();
-    }
-
-    // Send back the ID of the new movie
-    res.json({ id: result.insertId });
-    console.log({ id: result.insertId });
-  });
-});
-
-// Retrieve all movies
-app.get("/api/collections", function(req, res) {
-  connection.query("SELECT * FROM collections;", function(err, data) {
-    if (err) {
-      return res.status(500).end();
-    }
-
-    res.json(data);
-  });
-});
-
-// Update a movie
-app.put("/api/collections/:id", function(req, res) {
-  connection.query("UPDATE collections SET collection = ? WHERE id = ?", [req.body.collection, req.params.id], function(err, result) {
-    if (err) {
-      // If an error occurred, send a generic server failure
-      return res.status(500).end();
-    }
-    else if (result.changedRows === 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    }
-    res.status(200).end();
-
-  });
-});
-
-// Delete a movie
-app.delete("/api/collections/:id", function(req, res) {
-  connection.query("DELETE FROM collections WHERE id = ?", [req.params.id], function(err, result) {
-    if (err) {
-      // If an error occurred, send a generic server failure
-      return res.status(500).end();
-    }
-    else if (result.affectedRows === 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    }
-    res.status(200).end();
-
-  });
-});
-
-// // Start our server so that it can begin listening to client requests.
-// app.listen(PORT, function() {
-//   // Log (server-side) when our server has started
-//   console.log("Server listening on: http://localhost:" + PORT);
-// });

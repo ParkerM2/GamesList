@@ -9,22 +9,22 @@ let searchPageRender = async function (app, title) {
 app.get("/search", loginController.checkLoggedIn, async function (req, res) {
     // let user = JSON.parse(JSON.stringify(req.user));
     axios({
-            "method":"GET",
-            "url":"https://chicken-coop.p.rapidapi.com/games",
-            "headers":{
-            "content-type":"application/octet-stream",
-            "x-rapidapi-host":"chicken-coop.p.rapidapi.com",
-            "x-rapidapi-key":"c23b869635mshbd93a4ffe3425ecp12d50bjsnae0f66b387be",
+        "method":"GET",
+        "url":"https://api.rawg.io/api/games",
+        "headers":{
+            "User-Agent": "GamesList/0.1",
             "useQueryString":true
         },"params":{
-            "title": req.query.q
+            "search": req.query.q,
+            "ordering": "-rating",
+            "key": '78840b4e2017430cb72fc273ed6f1530'
         }
-    })
-        .then((response)=>{
+    }).then((response)=>{
       
         let apiData = {
-            apiData : response.data.result,
-            query: req.query.q
+            results: response.data.results,
+            query: req.query.q,
+            user : req.user
         }
 
 
@@ -48,20 +48,17 @@ app.get("/gameDetails", function(req, res) {
     console.log("GET /gameDetails", req.query)
     axios({
         "method":"GET",
-        "url":"https://chicken-coop.p.rapidapi.com/games/" + encodeURIComponent(req.query.title),
+        "url":"https://api.rawg.io/api/games/" + req.query.id,
         "headers":{
-            "content-type":"application/octet-stream",
-            "x-rapidapi-host":"chicken-coop.p.rapidapi.com",
-            "x-rapidapi-key":"c23b869635mshbd93a4ffe3425ecp12d50bjsnae0f66b387be",
+            "User-Agent": "GamesList/0.1",
             "useQueryString":true
         },"params":{
-            "platform": encodePlatform(req.query.platform)
+            "key": '78840b4e2017430cb72fc273ed6f1530'
         }
     })
     .then((response)=>{
-        let gameDetails = response.data.result;
-        gameDetails.platform = encodePlatform(req.query.platform);
-        userService.hasGame(req.user, req.query.title, gameDetails.platform, function(err, result) {
+        let gameDetails = response.data;
+        userService.hasGame(req.user, req.query.id, function(err, result) {
             gameDetails.hasGame = result;
             gameDetails.layout = false;
             res.render("partials/games/game-details", gameDetails);

@@ -5,7 +5,7 @@ const axios = require('axios');
 module.exports = async function (res) {
     axios({
         "method":"GET",
-        "url":"https://chicken-coop.p.rapidapi.com/games/%7BHalf-Life%7D",
+        "url":"https://chicken-coop.p.rapidapi.com/games/%7B"+title+"%7D",
         "headers":{
         "content-type":"application/octet-stream",
         "x-rapidapi-host":"chicken-coop.p.rapidapi.com",
