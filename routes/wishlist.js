@@ -8,6 +8,7 @@ app.get("/collection", function(req, res) {
       return res.status(500).end();
     }
     let user = JSON.parse(JSON.stringify(req.user));
+    console.log(user, "user in app.get/collection")
     
 
     res.render("wishlist", { collections: data, user: user });

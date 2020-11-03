@@ -11,7 +11,9 @@ app.get("/user", async function (req, res) {
       userService.listGames(req.user, function(err, games){
           // Renders the user.handlebars page and sends it the data obj 
           // that contains the requested image/score/title/description and also grabs the user data
-          res.render("user", { user: req.user, games: games })
+          let user = JSON.parse(JSON.stringify(req.user))
+          console.log(user, " app / get / user line 14 userpage routes")
+          res.render("user", { user: user, games: games })
       })
     
 });

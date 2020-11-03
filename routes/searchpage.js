@@ -28,17 +28,6 @@ app.get("/search", loginController.checkLoggedIn, async function (req, res) {
             query: req.query.q,
             user : user
         }
-
-
-        // INSERT INTO games (game_title, id) VALUES (apiData.)
-        // let titleObj = {
-        //     title: response.data.result.title,
-        //     title: response.data[1].result.title,
-        //     title: response.data[2].result.title,
-        // };
-        // console.log(titleObj.title)
-        
-        // console.log(titleObj)
         res.render("search", apiData)
     })
         .catch((error)=>{
@@ -66,6 +55,7 @@ app.get("/gameDetails", function(req, res) {
         userService.hasGame(req.user, req.query.title, gameDetails.platform, function(err, result) {
             gameDetails.hasGame = result;
             gameDetails.layout = false;
+            
             res.render("partials/games/game-details", gameDetails);
         });    
     })
