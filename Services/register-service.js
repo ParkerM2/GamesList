@@ -36,7 +36,7 @@ let createNewUser = (data) => {
                     resolve("Create a new user successful");
                 }
             );
-            console.log(query.sql);
+            console.log(query.sql, "query.sql");
         }
     });
 };
