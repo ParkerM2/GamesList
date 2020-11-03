@@ -31,6 +31,8 @@ const { searchPageRender } = require('./routes/searchpage');
 
 const renderWishList = require('./routes/wishlist');
 
+const navBar = require('./controllers/home-page');
+
 app.use(morgan('tiny'));
 
 //use cookie parser
@@ -71,6 +73,8 @@ initWebRoutes(app);
 apiRoute.userPageRender(app);
 searchPageRender(app);
 renderWishList.wishListRenderPage(app);
+navBar.handleHelloWorld(app);
+
 
 app.use(express.static(__dirname + '/public'));
 

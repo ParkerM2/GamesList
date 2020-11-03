@@ -7,6 +7,7 @@ var passport = require("passport");
 var initPassportLocal = require("../controllers/passport-local-controller");
 const DBConnection = require('../config/DBConnection')
 const {check} = require('express-validator');
+const { checkLoggedOut } = require('../controllers/login-controller');
 
 // Init all passport
 initPassportLocal();
@@ -41,8 +42,8 @@ let initWebRoutes = (app) => {
                 console.log(req.body.password)
         return value === req.body.password
             })], registerController.createNewUser);
-            
     router.post("/logout", loginController.postLogOut);
+    router.get("/logout", loginController.postLogOut)
     return app.use("/", router);
 };
 module.exports = initWebRoutes;
