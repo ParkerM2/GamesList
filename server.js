@@ -25,11 +25,11 @@ const bodyParser = require('body-parser');
 
 const path = require('path');
 
-// const getAPI = require('./controllers/user-controller');
-
-// getAPI();
 const apiRoute = require('./routes/userpage-routes');
+
 const { searchPageRender } = require('./routes/searchpage');
+
+const renderWishList = require('./routes/wishlist');
 
 app.use(morgan('tiny'));
 
@@ -68,8 +68,9 @@ app.use(passport.session());
 
 // init all web routes
 initWebRoutes(app);
-apiRoute.userPageRender(app, "Half-Life")
-searchPageRender(app)
+apiRoute.userPageRender(app);
+searchPageRender(app);
+renderWishList.wishListRenderPage(app);
 
 app.use(express.static(__dirname + '/public'));
 

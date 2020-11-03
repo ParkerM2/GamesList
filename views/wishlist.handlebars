@@ -1,0 +1,82 @@
+<h1>Collection</h1>
+
+<ul>
+  {{#each collections}}
+    <li>
+      <p>
+        {{this.id}} {{this.data}}
+        {{data}}
+
+        <button data-collectionid="{{this.id}}" class="delcollection">Delete</button>
+      </p>
+    </li>
+  {{/each}}
+</ul>
+
+<h2>Add a Game to Watch</h2>
+<form  class="button-size">
+	<textarea type="text" name="collection"></textarea>
+	<button id="addCollection" type="submit">Save Game!</button>
+</form>
+
+<h2>Update a Game</h2>
+<form class="button-size">
+  <input type="text" name="id" placeholder="id">
+	<textarea type="text" name="collection" placeholder="what do you want to update this game title to?"></textarea>
+	<button id="updateCollection" type="submit">Update game!</button>
+</form>
+
+<script type="text/javascript">
+  $(".delcollection").on("click", function(event) {
+    var id = $(this).data("collectionid");
+    // Send the DELETE request.
+    $.ajax("/api/collections/" + id, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+  $("#addCollection").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+    var newCollection = {
+      collection: $("#addColletion [name=collection]").val().trim()
+    };
+    // Send the POST request.
+    $.ajax("/api/collections", {
+      type: "POST",
+      data: newCollection
+    }).then(
+      function() {
+        console.log("added new collection");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+  $("#updateCollection").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+    var id = $("[name=id]").val().trim();
+    var updatedCollection = {
+      collection: $("#updateCollection [name=collection]").val().trim()
+    };
+    // Send the PUT request.
+    $.ajax("/api/collections/" + id, {
+      type: "PUT",
+      data: updatedCollection
+    }).then(
+      function() {
+        console.log("updated id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+</script>
+
+

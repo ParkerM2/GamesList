@@ -22,9 +22,11 @@ app.get("/search", loginController.checkLoggedIn, async function (req, res) {
     })
         .then((response)=>{
       
+        let user = JSON.parse(JSON.stringify(req.user));
         let apiData = {
             apiData : response.data.result,
-            query: req.query.q
+            query: req.query.q,
+            user : user
         }
 
 

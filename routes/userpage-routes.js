@@ -15,9 +15,6 @@ app.get("/user", async function (req, res) {
       })
     
 });
-    // controller.getAPI(res)
-    // console.log(JSON.parse(JSON.stringify(req.user)));
-    // console.log("after res =>","userpagerouteline8");
 
 app.post('/user/addGame', function(req, res) { 
   userService.addGame(req.user, req.body.title, req.body.platform, function (err, results) {
@@ -32,9 +29,6 @@ app.post('/user/removeGame', function(req, res) {
       res.status(200).send('Success');
   });
 })
-
-// controller.getAPI(res)
-// console.log(req.JSON.Parse(JSON.stringify(user)))
 
 }
 module.exports = {userPageRender : userPageRender}
