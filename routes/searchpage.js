@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const loginController = require('../controllers/login-controller')
 const userService = require('../Services/user-service');
-
+require('dotenv').config();
 let searchPageRender = async function (app, title) {
 
 app.get("/search", loginController.checkLoggedIn, async function (req, res) {
@@ -17,10 +17,9 @@ app.get("/search", loginController.checkLoggedIn, async function (req, res) {
         },"params":{
             "search": req.query.q,
             "ordering": "-rating",
-            "key": '78840b4e2017430cb72fc273ed6f1530'
+            "key": process.env.API_KEY
         }
     }).then((response)=>{
-      
         let apiData = {
             results: response.data.results,
             query: req.query.q,
@@ -42,7 +41,7 @@ app.get("/gameDetails", function(req, res) {
             "User-Agent": "GamesList/0.1",
             "useQueryString":true
         },"params":{
-            "key": '78840b4e2017430cb72fc273ed6f1530'
+            "key": process.env.API_KEY
         }
     })
     .then((response)=>{
@@ -50,7 +49,6 @@ app.get("/gameDetails", function(req, res) {
         userService.hasGame(req.user, req.query.id, function(err, result) {
             gameDetails.hasGame = result;
             gameDetails.layout = false;
-            
             res.render("partials/games/game-details", gameDetails);
         });    
     })
@@ -59,16 +57,6 @@ app.get("/gameDetails", function(req, res) {
         res.status(500).end(error)
     })
 });
-}
-
-function encodePlatform(platform) {
-    switch(platform.toLowerCase()) {
-        case 'ps4': return 'playstation-4';
-        case 'ps3': return 'playstation-3';
-        case 'ps2': return 'playstation-2';
-        // case 'xone': return 'xbox-one';
-        default: return platform.toLowerCase();
-    }
 }
 
 module.exports = {searchPageRender : searchPageRender}
