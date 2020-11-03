@@ -2,26 +2,16 @@ const connection = require("./../config/DBConnection");
 
 
 let wishListRenderPage = function (app) {
-  app.get("/", function (req, res) {
-    connection.query("SELECT * FROM collections;", function (err, data) {
-      if (err) {
-        return res.status(500).end();
-      }
-      let user = JSON.parse(JSON.stringify(req.user));
-      console.log(data)
-      res.render('partial/current-wish-list', { collections: data, user: user })
-  })
-})
 // Use Handlebars to render the main index.html page with the movies in it.
 app.get("/collection", function(req, res) {
   connection.query("SELECT * FROM collections;", function(err, data) {
     if (err) {
       return res.status(500).end();
     }
-    let user = JSON.parse(JSON.stringify(req.user));
+    //let user = JSON.parse(JSON.stringify(req.user));
     
     // res.render('partial/current-wish-list', { collections: data, user: user })
-    res.render("wishlist", { collections: data, user: user })
+    res.render("wishlist", { collections: data, user: req.user })
   });
 });
 
