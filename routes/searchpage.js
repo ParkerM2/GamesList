@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const loginController = require('../controllers/login-controller')
 const userService = require('../Services/user-service');
-require('dotenv').config();
 let searchPageRender = async function (app, title) {
 
 app.get("/search", loginController.checkLoggedIn, async function (req, res) {
