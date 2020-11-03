@@ -17,7 +17,7 @@ app.get("/user", async function (req, res) {
 });
 
 app.post('/user/addGame', function(req, res) { 
-  userService.addGame(req.user, req.body.id, req.body.title, function (err, results) {
+  userService.addGame(req.user, req.body.id, req.body.title, req.body.game_img, function (err, results) {
       if (err) {throw err}
       res.status(201).send('Created');
   });

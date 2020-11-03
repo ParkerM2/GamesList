@@ -39,10 +39,11 @@ $(document).ready(function() {
     let $button  = $(event.target);
     let gameId   = $button.data('game-id');
     let title    = $button.data('title');
+    let img      = $button.data('game-img');
     let action   = $button.data('action');
     $button.attr('disabled', true)
 
-    $.post('/user/' + action + 'Game', { id: gameId, title: title }).done(function(result) {
+    $.post('/user/' + action + 'Game', { id: gameId, title: title, game_img: img }).done(function(result) {
       if (action === 'add') {
         $button.removeClass('btn-primary').addClass('btn-danger');
         $button.text("Remove game");

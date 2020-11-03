@@ -47,20 +47,12 @@ let createNewUser = (data) => {
                     console.log("Create a new user success!")
                     resolve("Create a new user successful");
                 }
-<<<<<<< HEAD
-            );
-            console.log(query.sql, "query.sql");
-        }
-    });
-};
-=======
             )
             });    
             }
         };
     }
 )};
->>>>>>> 51eb54e65a02323e4d17b8f070dd62c7a54a7881
 
 // Querying the mysql db to check if an email is already being used
 let checkExistEmail = (email) => {

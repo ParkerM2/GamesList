@@ -4,9 +4,9 @@
         <h5 class="card-title">{{ name }}</h5>
         <p class="card-text">{{{ description }}}</p>
         {{#if hasGame}}
-            <button class="btn btn-danger" data-action="remove" data-game-id="{{ id }}" data-title="{{ name }}">Remove Game</button>
+            <button class="btn btn-danger" data-action="remove" data-game-img="{{ background_image }}" data-game-id="{{ id }}" data-title="{{ name }}">Remove Game</button>
         {{else}}
-            <button class="btn btn-primary" data-action="add" data-game-id="{{ id }}" data-title="{{ name }}">Add Game</button>
+            <button class="btn btn-primary" data-action="add" data-game-img="{{ background_image }}" data-game-id="{{ id }}" data-title="{{ name }}">Add Game</button>
         {{/if}}
     </div>
 </div>
