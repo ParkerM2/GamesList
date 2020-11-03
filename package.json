@@ -25,6 +25,8 @@
     "express": "^4.17.1",
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
+    "express-handlebars": "^5.2.0",
+    "express-validator": "^6.6.1",
     "hbs": "^4.1.1",
     "http": "0.0.1-security",
     "method-override": "^3.0.0",
@@ -37,8 +39,6 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
-    "express-handlebars": "^5.2.0",
-    "express-validator": "^6.6.1",
     "nodemon": "^2.0.6",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0"
