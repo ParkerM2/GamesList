@@ -5,9 +5,7 @@ var registerController = require("../controllers/register");
 var loginController = require("../controllers/login-controller");
 var passport = require("passport");
 var initPassportLocal = require("../controllers/passport-local-controller");
-var expressValidator = require('express-validator')
 const DBConnection = require('../config/DBConnection')
-const { body, validationResult } = require('express-validator');
 const {check} = require('express-validator');
 const { checkLoggedOut } = require('../controllers/login-controller');
 

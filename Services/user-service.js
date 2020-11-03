@@ -14,9 +14,9 @@ let hasGame = (user, gameId, callback) => {
   )
 }
 
-let addGame = (user, gameId, title, callback) => {
+let addGame = (user, gameId, title, img, callback) => {
     DBConnection.query('INSERT INTO `games` SET ?', {
-        user_id: user.id, game_id: gameId, game_title: title
+        user_id: user.id, game_id: gameId, game_title: title, game_img: img
     }, callback);
 }
 

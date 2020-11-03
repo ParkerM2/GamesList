@@ -68,8 +68,6 @@ app.use(passport.initialize());
 
 app.use(passport.session());
 
-
-
 // init all web routes
 initWebRoutes(app);
 apiRoute.userPageRender(app);
@@ -77,8 +75,6 @@ searchPageRender(app);
 renderWishList.wishListRenderPage(app);
 navBar.handleHelloWorld(app);
 
-
-// await chickenApi.searchAPI("half-Life");
 
 app.use(express.static(__dirname + '/public'));
 

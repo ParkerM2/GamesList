@@ -1,9 +1,8 @@
-{{>nav-bar}}
+{{> nav-bar }}
 <div class="col-6 my-4">
 {{> search-form }}
 </div>
 <h1>Search results</h1>
-
 <div class="row">
   <div class="col-5 col-lg-3">
     <ul id="game_list" class="list-group">
@@ -17,11 +16,8 @@
     </ul>
   </div>
   <div class="col-7 offset-lg-1" id="game_details">
-    
   </div>
 </div>
-
-
 <script type="text/javascript">
 $(document).ready(function() {
   // document.getElementById('game_list').getElementsByTagName('a')
@@ -29,21 +25,19 @@ $(document).ready(function() {
     event.preventDefault();
     $('#game_list li').removeClass('active');
     $(event.target).parent('li').addClass('active');
-    let title = $(event.target).data('title');
-    let platform = $(event.target).data('platform');
-    $.get('/gameDetails', { title: title, platform: platform }).done(function(result) {
+    let gameId = $(event.target).data('game-id');
+    $.get('/gameDetails', { id: gameId }).done(function(result) {
       $('#game_details').html(result);
     })
   })
-
   $('#game_details').on('click', '.btn', function(event) {
     let $button  = $(event.target);
+    let gameId   = $button.data('game-id');
     let title    = $button.data('title');
-    let platform = $button.data('platform');
+    let img      = $button.data('game-img');
     let action   = $button.data('action');
     $button.attr('disabled', true)
-
-    $.post('/user/' + action + 'Game', { title: title, platform: platform }).done(function(result) {
+    $.post('/user/' + action + 'Game', { id: gameId, title: title, game_img: img }).done(function(result) {
       if (action === 'add') {
         $button.removeClass('btn-primary').addClass('btn-danger');
         $button.text("Remove game");
