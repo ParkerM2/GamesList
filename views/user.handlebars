@@ -13,7 +13,7 @@
     <h1 class="display-5">{{user.user_name}}'s Game Dex !</h1>
     <br>
     <h1 class="display-4">Search here for titles of more games!</h1>
-    {{> search-form }}
+    {{!-- {{> search-form }} --}}
     {{#each apiData}}
         <li class="list-group-item">
           <a href="#" data-title="{{title}}" data-platform="{{platform}}">{{this.title}} ({{this.platform}})</a>
@@ -24,17 +24,12 @@
 </div>
 </div>
 
-
-{{!-- {{#each games}} --}}
-<div class="card float-left col-3" style="width: 18rem;display:flex;background-color:#D3EFBD; margin: 25px;">
-  <img src="{{game.img}}" class="card-img-top" alt="Game Icon via Chicken-Coop API">
-  <div class="card-body">
-    <h3>{{game_title}}"Game-Title Goes here"</h3> <br>
-     <h3>{{platform}}platform goes here</h3> <br>
-    <p class="card-text">{{game_description}}"Game-Description goes here"</p>
-  </div>
-</div>
-
+{{!-- 
+{{>games/game-details}}
+{{>games/game-details.description_raw}}
+{{>games/game-details.name}}
+{{>games/game-details.background_image}}
+ --}}
 
 
 <div class="card float-left col-3" style="width: 18rem; display:flex; margin-top: 25px; margin: 25px;">
@@ -45,6 +40,7 @@
     <p class="card-text">"Game-Description goes here"</p>
   </div>
 </div>
+
 
 
 {{!-- {{/each}} --}}

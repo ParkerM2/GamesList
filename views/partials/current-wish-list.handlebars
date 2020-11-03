@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-12">
+    <ul class="list-group">
+      {{#each collections}}
+        <li class="list-group-item">
+          <h2>{{this.collection}}</h2>
+          <button data-collectionid="{{this.id}}" id="delcollection" style="float:right"class="btn btn-danger"> Delete</button>
+        </li>
+      {{else}}
+        <p></p>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="col-12" id="game_details">
+  </div>
+</div>

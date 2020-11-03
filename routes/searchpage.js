@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const loginController = require('../controllers/login-controller')
 const userService = require('../Services/user-service');
-// require('dotenv').config();
+require('dotenv').config();
 let searchPageRender = async function (app, title) {
 
 app.get("/search", loginController.checkLoggedIn, async function (req, res) {
@@ -25,7 +25,9 @@ app.get("/search", loginController.checkLoggedIn, async function (req, res) {
             query: req.query.q,
             user : req.user
         }
+        res.render('user', apiData)
         res.render("search", apiData)
+        res.render('user', apiData)
     })
         .catch((error)=>{
         console.log(error)
@@ -49,6 +51,7 @@ app.get("/gameDetails", function(req, res) {
         userService.hasGame(req.user, req.query.id, function(err, result) {
             gameDetails.hasGame = result;
             gameDetails.layout = false;
+            console.log(gameDetails, "GAME DETAILS CONSOLE LOG")
             res.render("partials/games/game-details", gameDetails);
         });    
     })
