@@ -1,4 +1,5 @@
 const axios = require('axios');
+require("dotenv").config()
 // const userPageRoute = require("../routes/userpage-routes")
 
 
@@ -9,7 +10,7 @@ module.exports = async function (res) {
         "headers":{
         "content-type":"application/octet-stream",
         "x-rapidapi-host":"chicken-coop.p.rapidapi.com",
-        "x-rapidapi-key":"c23b869635mshbd93a4ffe3425ecp12d50bjsnae0f66b387be",
+        "x-rapidapi-key": process.env.APIKEY,
         "useQueryString":true
         },"params":{
         "platform":"pc"
