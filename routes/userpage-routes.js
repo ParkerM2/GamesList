@@ -12,7 +12,9 @@ let userPageRender = async function (app, title) {
       // Renders the user.handlebars page and sends it the data obj 
       // that contains the requested image/score/title/description and also grabs the user data
       let user = JSON.parse(JSON.stringify(req.user))
-      res.render('user', { user: user, games: games })
+      let gamesList = JSON.parse(JSON.stringify(games))
+      console.log(gamesList)
+      res.render('user', { user: user, gamesList: gamesList })
     })
 });
 app.post('/user/addGame', function(req, res) { 
