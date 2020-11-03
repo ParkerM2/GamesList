@@ -1,6 +1,4 @@
 const axios = require('axios');
-const express = require('express');
-const app = express();
 const loginController = require('../controllers/login-controller')
 const userService = require('../Services/user-service');
 let searchPageRender = async function (app, title) {
